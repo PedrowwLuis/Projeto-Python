@@ -1,5 +1,5 @@
-print (bem vindo ao jogo da velha)
-print (você vai jogar contra o computador)
-print ( ganhar quem conseguir uma linha , coluna do diagonal do grid com o memso simbolo)
+print ("Bem vindo ao Jogo da velha")
+print ("Você vai jogar contra o computador")
+print ("Ganha quem conseguir fazer uma linha, coluna ou diagonal do grid com o mesmo símbolo")
 
-escolha= input
+escolha=
