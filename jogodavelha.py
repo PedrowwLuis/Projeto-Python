@@ -15,6 +15,3 @@ escolha = input("Qual é a sua escolha")
 
 grid = ["_"] * 9
 
-for indice in range(len(grid)):
-    print (grid[indice])
-    
