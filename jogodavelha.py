@@ -54,6 +54,7 @@ while True:
 
  grid[escolha_computador-1] = "O"
  vencedor = verifica_grid(grid)
+ 
  quantidades_escolhas += 1
  if vencedor != 0:
    break
