@@ -21,9 +21,57 @@ def imprime_grid(grid):
     if indice == 2 or indice == 5 or indice == 8:
         print("")
 
-def verifica_grid(grid):
+def verifica_grid(grid, jogador):
+
+  #Verificação de vitoria horizontal
+  if grid[0] == jogador and grid[1] == jogador and grid[2] == jogador:
+    if jogador == "X":
+      return 1 
+    else:
+      return 2 
+  if grid[3] == jogador and grid[4] == jogador and grid[5] == jogador:
+      if jogador == "X":
+        return 1 
+      else:
+        return 2   
+  if grid[6] == jogador and grid[7] == jogador and grid[8] == jogador:
+     if jogador == "X":
+        return 1
+     else:
+       return 2
+     
+    #Verificação de vitoria horizontal
+  if grid[0] == jogador and grid[3] == jogador and grid[6] == jogador:
+     if jogador == "X":
+      return 1
+     else:
+       return 2    
+  if grid[1] == jogador and grid[4] == jogador and grid[7] == jogador:
+     if jogador == "X":
+      return 1
+     else:
+       return 2   
+  if grid[2] == jogador and grid[5] == jogador and grid[8] == jogador:
+     if jogador == "X":
+      return 1
+     else:
+       return 2
   
- quantidades_escolhas = 0
+  #Verificação de vitoria diagonal
+  if grid[0] == jogador and grid[4] == jogador and grid[8] == jogador:
+    if jogador == "X":
+      return 1
+    else:
+      return 2
+  if grid[2] == jogador and grid[4] == jogador and grid[6] == jogador:
+    if jogador == "X":
+      return 1
+    else:
+      return 2
+    
+  return 0
+    
+quantidades_escolhas = 0
 
 grid = ["_"] * 9
   
@@ -33,36 +81,39 @@ while True:
 
  while grid[escolha-1] != "_":
   print("Sua  escolha foi inválida, veja como está o grid")
- imprime_grid(grid)
- escolha = int(input("Qual é a sua escolha"))
+  imprime_grid(grid)
+  escolha = int(input("Qual é a sua escolha"))
 
  grid[escolha-1] = "X"
  quantidades_escolhas += 1
 
- vencedor = verifica_grid(grid)
+ vencedor = verifica_grid(grid,"X")
+
  if vencedor != 0:
    break
  
- if quantidades_escolhas == 9
+ if quantidades_escolhas == 9:
    break
  
  imprime_grid(grid) 
 
- escolha_computador = random.randint(1,9) 
+ escolha_computador = random.randint(1,9)
  while grid[escolha_computador-1] != "_":
-  escolha_computador = random.randint(1,9)    
+  escolha_computador = random.randint(1,9)
 
- grid[escolha_computador-1] = "O"
- vencedor = verifica_grid(grid)
- 
+ grid[escolha_computador - 1] = "O"
  quantidades_escolhas += 1
+
+ vencedor = verifica_grid(grid,"O")
  if vencedor != 0:
    break
  imprime_grid(grid) 
  
- if vencedor == 1:
+if vencedor == 1:
     print("Parabéns, você ganhou!")
- elif vencedor == 2:
+elif vencedor == 2:
    print ("Você perdeu, o computador ganhou!")
- else:
+else:
     print("Deu velha, ninguém ganhou, foi empate!")
+
+imprime_grid(grid)
