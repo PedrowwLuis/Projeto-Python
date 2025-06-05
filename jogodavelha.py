@@ -1,18 +1,21 @@
 import random
 
-print ("Bem vindo ao Jogo da velha")
+# Mensagens iniciais explicando o funcionamento do jogo
+print ("Bem vindo ao Jogo da velha!")
 print ("Você vai jogar contra o computador")
 print ("Ganha quem conseguir fazer uma linha, coluna ou diagonal do grid com o mesmo símbolo")
- 
-print ("Você precisa escolher uma posição no grid para marcar sua jogada, veja o grid:")
+
+# Mostra ao jogador o exemplo de grid e posições 
+print ("Você precisa escolher uma posição no grid para marcar sua jogada, veja o grid: ")
 print ("_ _ _")
 print ("_ _ _")
 print ("_ _ _")
-print ("escolha um número de 1 a 9 para sua jogada, conforme o grid a seaguir seguir")
+print ("escolha um número de 1 a 9 para sua jogada, conforme o grid a seguir ")
 print ("1 2 3")
 print ("4 5 6")
 print ("7 8 9")
 
+# Função que imprime o grid atual do jogo
 def imprime_grid(grid):
  print ("O status do grid é\n")
 
@@ -21,6 +24,7 @@ def imprime_grid(grid):
     if indice == 2 or indice == 5 or indice == 8:
         print("")
 
+# Função que verifica se houve vitória
 def verifica_grid(grid, jogador):
 
   #Verificação de vitoria horizontal
@@ -70,45 +74,63 @@ def verifica_grid(grid, jogador):
       return 2
     
   return 0
-    
+
+# Variável que conta quantas jogadas foram feitas    
 quantidades_escolhas = 0
 
+# Cria o grid inicial com 9 posições vazias
 grid = ["_"] * 9
-  
+
+# Início do loop principal do jogo  
 while True:
- 
- escolha = int(input("Qual é a sua escolha"))
 
- while grid[escolha-1] != "_":
-  print("Sua  escolha foi inválida, veja como está o grid")
-  imprime_grid(grid)
-  escolha = int(input("Qual é a sua escolha"))
+ # Loop que valida a jogada do jogador  
+  while True:
+    try:
+      escolha = int(input("Qual é a sua escolha (1 a 9): "))
+      if escolha < 1 or escolha > 9:
+        print("Escolha inválida! Digite um número entre 1 e 9.")
+        continue
+      if grid[escolha - 1] != "_":
+        print("Essa posição já está ocupada. Veja o grid:")
+        imprime_grid(grid)
+        continue
+      break
+    except ValueError:
+      print("Entrada inválida! Digite apenas números inteiros de 1 a 9.")
 
- grid[escolha-1] = "X"
- quantidades_escolhas += 1
+# Marca a jogada do jogador no grid
+  grid[escolha - 1] = "X"
+  quantidades_escolhas += 1
 
- vencedor = verifica_grid(grid,"X")
+ # Verifica se o jogador ganhou
+  vencedor = verifica_grid(grid,"X")
 
- if vencedor != 0:
-   break
- 
- if quantidades_escolhas == 9:
-   break
- 
- imprime_grid(grid) 
+  if vencedor != 0:
+    break
+# Se todas as posições forem preenchidas e ninguém ganhou, é empate
+  if quantidades_escolhas == 9:
+    break
 
- escolha_computador = random.randint(1,9)
- while grid[escolha_computador-1] != "_":
+  imprime_grid(grid) # Mostra o grid após a jogada do jogador
+
+# Jogada do computador (escolhe posição aleatória livre)
   escolha_computador = random.randint(1,9)
+  while grid[escolha_computador-1] != "_":
+    escolha_computador = random.randint(1,9)
 
- grid[escolha_computador - 1] = "O"
- quantidades_escolhas += 1
+ # Marca a jogada do computador no grid
+  grid[escolha_computador - 1] = "O"
+  quantidades_escolhas += 1
 
- vencedor = verifica_grid(grid,"O")
- if vencedor != 0:
-   break
- imprime_grid(grid) 
- 
+# Verifica se o computador ganhou
+  vencedor = verifica_grid(grid,"O")
+  if vencedor != 0:
+    break
+
+  imprime_grid(grid) # Mostra o grid após a jogada do computador
+
+# Mensagem final com resultado 
 if vencedor == 1:
     print("Parabéns, você ganhou!")
 elif vencedor == 2:
@@ -116,4 +138,4 @@ elif vencedor == 2:
 else:
     print("Deu velha, ninguém ganhou, foi empate!")
 
-imprime_grid(grid)
+imprime_grid(grid)# Mostra o resultado final do Grid
